@@ -2,13 +2,14 @@
     "name": "social/sociallogin",
     "description": "package for install all socialapp login",
     "type": "project",
-    "license": "1.0",
+    "license": "MIT",
     "authors": [{
         "name": "mohamed Ellithy",
         "email": "mohamedellithyfreelanc@gmail.com"
     }],
     "minimum-stability": "dev",
     "require": {
+        "php": "^7.2 || ^8.0",
         "socialiteproviders/facebook": "^4.1",
         "socialiteproviders/google": "^4.1",
         "socialiteproviders/linkedin": "^4.1"
