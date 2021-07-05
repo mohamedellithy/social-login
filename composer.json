@@ -7,7 +7,7 @@
         "name": "mohamed Ellithy",
         "email": "mohamedellithyfreelanc@gmail.com"
     }],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": "^7.2 || ^8.0",
         "socialiteproviders/facebook": "^4.1",
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SocialLogin\\": "src"
+            "Social\\SocialLogin\\": "src"
         }
     }
 }

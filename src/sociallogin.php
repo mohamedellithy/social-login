@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialLogin;
+namespace Social\SocialLogin;
 
 use Illuminate\Database\Eloquent\Model;
 

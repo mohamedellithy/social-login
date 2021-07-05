@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialLogin\socialapp;
+namespace Social\SocialLogin\socialapp;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
