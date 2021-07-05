@@ -14,9 +14,9 @@ class SocialLoginServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        $this->app->make('Socials\SocialLogin\socialapp\FacebookController');
-        $this->app->make('Socials\SocialLogin\socialapp\GoogleController');
-        $this->app->make('Socials\SocialLogin\socialapp\LinkedInController');
+        $this->app->make('Social\SocialLogin\socialapp\FacebookController');
+        $this->app->make('Social\SocialLogin\socialapp\GoogleController');
+        $this->app->make('Social\SocialLogin\socialapp\LinkedInController');
     }
 
     /**
