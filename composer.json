@@ -1,0 +1,21 @@
+{
+    "name": "sociallogin",
+    "description": "package for install all socialapp login",
+    "type": "project",
+    "license": "1.0",
+    "authors": [{
+        "name": "mohamed Ellithy",
+        "email": "mohamedellithyfreelanc@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "socialiteproviders/facebook": "^4.1",
+        "socialiteproviders/google": "^4.1",
+        "socialiteproviders/linkedin": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "SocialLogin\\": "src"
+        }
+    }
+}
