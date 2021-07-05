@@ -1,5 +1,5 @@
 {
-    "name": "sociallogin",
+    "name": "social/sociallogin",
     "description": "package for install all socialapp login",
     "type": "project",
     "license": "1.0",
