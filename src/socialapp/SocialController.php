@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use App\User;
 use Auth;
 use DB;
@@ -28,7 +29,7 @@ class SocialController extends Controller
 
 
     ## here select type of operation login or registration
-    public function socialApp(){
+    public function social_call(){
         $this->user_data = Socialite::driver($this->driver)->stateless()->user();
         ## if data is empty
         if(empty($this->user_data)) return;
@@ -42,7 +43,11 @@ class SocialController extends Controller
     ## here in case login
     public function socialLogin(){
         try{
-            $login_user = DB::table('users')->social()->where($this->attribute,$this->user_data->getId())->first();
+            $attr = [$this->attribute => $this->user_data->getId()];
+            $login_user = User::WhereHas('social',function(Builder $query) use ($attr){
+                $query->where($attr);
+            })->first();
+
             if( !empty($login_user) ){
                 Auth::login($login_user, true);
                 return redirect('home');
@@ -57,8 +62,12 @@ class SocialController extends Controller
     ## here in case registration
     public function socialRegister(){
         try{
+            $attr = [$this->attribute => $this->user_data->getId()];
             ## user login
-            $login_user = DB::table('users')->social()->where($this->attribute,$this->user_data->getId())->first();
+            $login_user = User::WhereHas('social',function(Builder $query) use ($attr){
+                $query->where($attr);
+            })->first();
+
             if( !empty($login_user) ){
                 return redirect('register')->withErrors([
                     'msg_socail_login'=>'you already have account please login to this account'
@@ -73,14 +82,17 @@ class SocialController extends Controller
                 ]);
             }
 
-            ## user login
-            $login_user = User::create([
-                'name'            => $this->user_data->getName(),
-                'email'           => $this->user_data->getEmail(),
-                'password'        => encrypt(substr($this->user_data->getName(),0,3).substr($this->user_data->getId(),0,3) )
-            ]);
+            ## user register
+            $login_user = User::where('email',$this->user_data->getEmail())->first();
+            if($login_user->count() == 0 ){
+                $login_user = User::create([
+                    'name'            => $this->user_data->getName(),
+                    'email'           => $this->user_data->getEmail(),
+                    'password'        => encrypt(substr($this->user_data->getName(),0,3).substr($this->user_data->getId(),0,3) )
+                ]);
+            }
 
-            $scial_register = $login_user->social()->associate([
+            $scial_register = $login_user->social()->create([
                     $this->attribute  => $this->user_data->getId(),
             ]);
 

@@ -1,11 +1,13 @@
 <?php
-use Illuminate\Support\Facades\Route;
 
-Route::get('login-facebook/{type}','Social\SocialLogin\socialapp\FacebookController@login_app')->name('login-facebook');
-Route::get('facebook-login','Social\SocialLogin\socialapp\FacebookController@socialApp')->name('social-login');
+Route::middleware(['web','api'])->group(function(){
 
-Route::get('login-google/{type}','Social\SocialLogin\socialapp\GoogleController@login_app')->name('login-google');
-Route::get('google-login','Social\SocialLogin\socialapp\GoogleController@socialApp')->name('social-login');
+    Route::get('login-facebook/{type}','social\sociallogin\socialapp\FacebookController@login_app')->name('login-facebook');
+    Route::get('facebook-login','social\sociallogin\socialapp\FacebookController@social_call')->name('social-login');
 
-Route::get('login-linkedin/{type}','Social\SocialLogin\socialapp\LinkedInController@login_app')->name('login-linkedin');
-Route::get('linkedin-login','Social\LinkedInController@socialApp')->name('social-login');
+    Route::get('login-google/{type}','social\sociallogin\socialapp\GoogleController@login_app')->name('login-google');
+    Route::get('google-login','social\sociallogin\socialapp\GoogleController@social_call')->name('social-login');
+
+    Route::get('login-linkedin/{type}','social\sociallogin\socialapp\LinkedInController@login_app')->name('login-linkedin');
+    Route::get('linkedin-login','social\sociallogin\socialapp\LinkedInController@social_call')->name('social-login');
+});

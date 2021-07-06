@@ -16,7 +16,7 @@ class sociallogin extends Model
         'user_id','facebook_id','google_id','linkedin_id'
     ];
 
-    function users(){
+    function user(){
        $this->belongsTo('App\User','user_id','id');
     }
 }
